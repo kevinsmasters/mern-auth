@@ -1,3 +1,4 @@
+var assert = require('assert');
 describe('Test /', ()=>{
   describe('register a new user', ()=>{
     // stub in db connection
