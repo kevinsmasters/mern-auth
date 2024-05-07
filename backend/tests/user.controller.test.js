@@ -1,4 +1,25 @@
-var assert = require('assert');
+import {use, should} from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../server.js'
+
+let mongoose = require("mongoose");
+
+const chai = use(chaiHttp);
+should();
+describe("Create a user", ()=>{
+  describe("POST /api/users", ()=> {
+    it("should save a user to the db", (done)=> {
+      chai.request(app)
+        .post('/api/users')
+        .end((err,res)=>{
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+  });
+  // etc
+})
 describe('Test /', ()=>{
   describe('register a new user', ()=>{
     // stub in db connection
