@@ -1,18 +1,23 @@
 import {use, should} from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server.js'
-
-let mongoose = require("mongoose");
+// import mongoose from 'mongoose';
 
 const chai = use(chaiHttp);
 should();
 describe("Create a user", ()=>{
   describe("POST /api/users", ()=> {
     it("should save a user to the db", (done)=> {
+      let user = {
+        name: "John User",
+        email: "john@user.com",
+        password: "safetacomountain5"
+      }
       chai.request(app)
         .post('/api/users')
+        .send(user)
         .end((err,res)=>{
-          res.should.have.status(200);
+          res.should.have.status(201);
           res.body.should.be.a('object');
           done();
         });
