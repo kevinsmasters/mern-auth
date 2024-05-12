@@ -6,6 +6,7 @@ import FormContainer from '../components/FormContainer';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { IRootState } from '../store';
+import { toast } from 'react-toastify';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('');
@@ -32,6 +33,7 @@ const LoginScreen = () => {
     navigate('/')
    } catch (err: any) {
     console.log(err.data.message || err.error);
+    toast.error(err.data.message || err.error);
    }
   }
   return (
