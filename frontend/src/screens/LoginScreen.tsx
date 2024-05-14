@@ -1,12 +1,13 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { IRootState } from '../store';
 import { toast } from 'react-toastify';
+import Loader from '../components/Loader';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>('');
@@ -32,7 +33,6 @@ const LoginScreen = () => {
     dispatch(setCredentials({ ...res }))
     navigate('/')
    } catch (err: any) {
-    console.log(err.data.message || err.error);
     toast.error(err.data.message || err.error);
    }
   }
@@ -58,6 +58,9 @@ const LoginScreen = () => {
             onChange={ (e)=> setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
+        { isLoading && <Loader />}
+
         <Button type='submit' variant='primary' className='mt-3'>
           Sign In
         </Button>
