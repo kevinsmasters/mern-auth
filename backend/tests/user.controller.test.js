@@ -22,6 +22,37 @@ describe("Create a user", ()=>{
           done();
         });
     });
+    it("should fail to save the same user to the db", (done)=> {
+      let user = {
+        name: "John User",
+        email: "john@user.com",
+        password: "safetacomountain5"
+      }
+      chai.request(app)
+        .post('/api/users')
+        .send(user)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+    // this test is broken
+    xit("should fail to save incorrect submission", (done)=> {
+      let user = {
+        name: "",
+        email: "",
+        password: "safetacomountain5"
+      }
+      chai.request(app)
+        .post('/api/users')
+        .send(user)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          done();
+        });
+    })
   });
   // etc
 })
