@@ -7,9 +7,9 @@
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
+    "test": "mocha --timeout 10000 backend/tests/*.js --exit",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,9 @@
     "mongoose": "^8.3.3"
   },
   "devDependencies": {
+    "chai": "^5.1.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.4.0",
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.0"
   }
