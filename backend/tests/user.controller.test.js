@@ -7,10 +7,10 @@ const chai = use(chaiHttp);
 should();
 describe("Create a user", ()=>{
   describe("POST /api/users", ()=> {
-    xit("should save a user to the db", (done)=> {
+    it("should save a user to the db", (done)=> {
       let user = {
-        name: "John User",
-        email: "john@user.com",
+        name: "Delete Me",
+        email: "delete@me.com",
         password: "safetacomountain5"
       }
       chai.request(app)
@@ -22,10 +22,10 @@ describe("Create a user", ()=>{
           done();
         });
     });
-    xit("should fail to save the same user to the db", (done)=> {
+    it("should fail to save the same user to the db", (done)=> {
       let user = {
-        name: "John User",
-        email: "john@user.com",
+        name: "Delete Me",
+        email: "delete@me.com",
         password: "safetacomountain5"
       }
       chai.request(app)
@@ -50,6 +50,38 @@ describe("Create a user", ()=>{
   });
   // etc
 })
+describe("Delete a user", ()=>{
+  describe("POST /api/users", ()=> {
+    it('should delete a user from the db', (done) => {
+      let user = {
+        email: "delete@me.com",
+      }
+
+      chai.request(app)
+        .delete('/api/users')
+        .send(user)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    })
+    it('should error when trying to delete a non-existing user', (done)=> {
+      let user = {
+        email: "nothere@email.com",
+      }
+
+      chai.request(app)
+        .delete('/api/users')
+        .send(user)
+        .end((err,res)=>{
+          res.should.have.status(404);
+          res.body.should.be.a('object');
+          done();
+        })
+    })
+  });
+});
 describe('Test /', ()=>{
   describe('register a new user', ()=>{
     // stub in db connection
