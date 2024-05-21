@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 const port = process.env.PORT || 5000;
+process.env.NODE_ENV ||= 'development'
 import userRoutes from './routes/userRoutes.js';
 
 connectDB();
