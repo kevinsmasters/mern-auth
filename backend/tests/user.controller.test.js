@@ -1,4 +1,3 @@
-process.env.NODE_ENV = 'test';
 import {use, should} from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server.js'
@@ -48,11 +47,29 @@ describe("Create a user", ()=>{
         });
     })
   });
-  // etc
-})
+});
+describe('Test /api/users/auth', ()=> {
+  describe('authenticate user', ()=> {
+    it('should login a user', (done)=> {
+      let user = {
+        email: "delete@me.com",
+        password: "safetacomountain5"
+      }
+
+      chai.request(app)
+        .post('/api/users/auth')
+        .send(user)
+        .end((err,res)=>{
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          done();
+        });
+    })
+  });
+});
 describe("Delete a user", ()=>{
   describe("POST /api/users", ()=> {
-    xit('should delete a user from the db', (done) => {
+    it('should delete a user from the db', (done) => {
       let user = {
         email: "delete@me.com",
       }
@@ -82,26 +99,6 @@ describe("Delete a user", ()=>{
     })
   });
 });
-describe('Test /', ()=>{
-  describe('register a new user', ()=>{
-    // stub in db connection
-    // it: user already exists
-    // it: invalid user data
-    // it: successful user submission
-    // it: redirects to (?)
-  });
-});
-
-describe('Test /auth', ()=> {
-  describe('login user', ()=> {
-    // db connect
-    // it: user does not exist
-    // it: invalid login credentials
-    // it: successful login
-    // it: redirects to (?)
-  });
-});
-
 describe('Test /logout', ()=> {
   describe('logout user', ()=> {
     // it: logs the user out
