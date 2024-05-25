@@ -20,3 +20,9 @@ test('renders hero header text', ()=> {
   const headerText = screen.getByText(/Mern Authentication/);
   expect(headerText).toBeInTheDocument();
 })
+
+test('renders sign in button', ()=> {
+  render(<Provider store={store}><Hero /></Provider>);
+  const buttonText1 = screen.getByText(/Sign in/i)
+  expect(buttonText1).toBeInTheDocument();
+})
