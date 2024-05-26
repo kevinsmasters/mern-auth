@@ -26,3 +26,9 @@ test('renders sign in button', ()=> {
   const buttonText1 = screen.getByText(/Sign in/i)
   expect(buttonText1).toBeInTheDocument();
 })
+
+test('renders register button', ()=> {
+  render(<Provider store={store}><Hero /></Provider>);
+  const buttonText2 = screen.getByText(/Register/i)
+  expect(buttonText2).toBeInTheDocument();
+})
