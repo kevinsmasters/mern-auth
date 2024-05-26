@@ -1,8 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import store from '../../store';
 import { Provider } from 'react-redux';
 import Hero from '../../components/Hero';
-import path from 'path';
 
 const mockUsedNavigate = jest.fn();
 const mockUseHref = jest.fn();
