@@ -101,6 +101,9 @@ describe("Delete a user", ()=>{
 });
 describe('Test /logout', ()=> {
   describe('logout user', ()=> {
+    // chai.request(app)
+    //   .post('/api/users/logout')
+
     // it: logs the user out
     // it: redirects to (?)
   });
